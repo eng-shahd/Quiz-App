@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Setup</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 0 10px;
+      }
+      h1 {
+        text-align: center;
+      }
+      .question-block {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+      }
+      label {
+        display: block;
+        margin: 5px 0;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 5px;
+        margin-top: 2px;
+        box-sizing: border-box;
+      }
+      .options {
+        margin-left: 20px;
+      }
+      button {
+        padding: 8px 12px;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Setup Your Quiz</h1>
+    <form id="quiz-form">
+      <div class="question-block" data-index="1">
+        <label>
+          Question 1:
+          <input
+            type="text"
+            name="question-1"
+            placeholder="Enter your question here"
+            required
+          />
+        </label>
+        <div class="options">
+          <label>
+            <input type="radio" name="correct-1" value="1" required /> Option 1
+          </label>
+          <input
+            type="text"
+            name="q1-option-1"
+            placeholder="Option 1 text"
+            required
+          />
+
+          <label>
+            <input type="radio" name="correct-1" value="2" /> Option 2
+          </label>
+          <input
+            type="text"
+            name="q1-option-2"
+            placeholder="Option 2 text"
+            required
+          />
+
+          <label>
+            <input type="radio" name="correct-1" value="3" /> Option 3
+          </label>
+          <input
+            type="text"
+            name="q1-option-3"
+            placeholder="Option 3 text"
+            required
+          />
+
+          <label>
+            <input type="radio" name="correct-1" value="4" /> Option 4
+          </label>
+          <input
+            type="text"
+            name="q1-option-4"
+            placeholder="Option 4 text"
+            required
+          />
+        </div>
+      </div>
+      <button type="button" id="add-question">Add Another Question</button>
+      <button type="submit">Save Quiz</button>
+    </form>
+
+    <script>
+      (function () {
+        let count = 1;
+        const form = document.getElementById("quiz-form");
+        const addBtn = document.getElementById("add-question");
+
+        addBtn.addEventListener("click", function () {
+          count++;
+          const template = document.querySelector(".question-block");
+          const clone = template.cloneNode(true);
+          clone.setAttribute("data-index", count);
+
+          clone.querySelector("label[for]");
+          clone.querySelector(
+            "label"
+          ).firstChild.textContent = `Question ${count}:`;
+          clone
+            .querySelector('input[name^="question-"]')
+            .setAttribute("name", `question-${count}`);
+          const radios = clone.querySelectorAll('input[type="radio"]');
+          const texts = clone.querySelectorAll('input[type="text"]');
+          radios.forEach((r, i) => {
+            r.setAttribute("name", `correct-${count}`);
+            r.setAttribute("value", i + 1);
+          });
+          texts.forEach((t, i) => {
+            if (i === 0) {
+              t.setAttribute("name", `question-${count}`);
+            } else {
+              t.setAttribute("name", `q${count}-option-${i}`);
+            }
+            t.value = "";
+          });
+          form.insertBefore(clone, addBtn);
+        });
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          // here you can process the form data or move to the quiz page
+          alert("Quiz saved!");
+        });
+      })();
+    </script>
+  </body>
+</html>
