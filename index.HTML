@@ -4,77 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz App</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: Arial, sans-serif;
-      }
-      nav {
-        background-color: darkslategray;
-        width: 100%;
-        margin: 0;
-        padding: 10px 0;
-        color: white;
-        font-size: larger;
-        text-align: center;
-      }
-      .cont {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 0 10px;
-      }
-      h1 {
-        text-align: center;
-      }
-      .question-block {
-        border: 1px solid #ccc;
-        padding: 10px;
-        margin-bottom: 15px;
-        border-radius: 5px;
-      }
-      label {
-        display: block;
-        margin: 5px 0;
-      }
-      input[type="text"] {
-        width: 100%;
-        padding: 5px;
-        margin-top: 2px;
-        box-sizing: border-box;
-      }
-      .options {
-        margin-left: 20px;
-      }
-      button {
-        padding: 8px 12px;
-        margin: 5px;
-        cursor: pointer;
-      }
-      #quiz-container {
-        display: none;
-      }
-      .options button {
-        display: block;
-        margin: 10px auto;
-        width: 220px;
-        padding: 10px;
-      }
-      #timer {
-        font-size: 25px;
-        margin-bottom: 10px;
-        color: red;
-        text-align: center;
-      }
-    </style>
+    <link rel="stylesheet" href="main.css">
   </head>
   <body>
     <nav>
       <b>Quiz App</b>
     </nav>
+    <div id="timer">00:00</div>
+
+    <main>
     <div class="cont">
       <h1 id="setup">Setup Your Quiz</h1>
 
@@ -88,6 +26,7 @@
               placeholder="Enter your question here"
               required
             />
+            <button class="delete-btn" >🗑️</button>
           </label>
           <div class="options">
             <label
@@ -132,166 +71,47 @@
             />
           </div>
         </div>
-        <button type="button" id="add-question">Add Another Question</button>
-        <button type="submit">Save Quiz</button>
+        <div id="button-group">
+        <button type="button" id="add-question">Add Question</button>
+        <button type="reset"  id="reset-btn">Reset Quiz</button>
+        <button type="submit" id="save-btn" >Save Quiz</button>
+      </div>
+       
       </form>
+    </div>
+    
       <!-- Tp show quiz  -->
       <div id="quiz-container">
-        <h1>Quiz!</h1>
-        <div id="timer"></div>
+        <h1>Quiz Started!</h1>
+        <!-- <div id="timer"></div> -->
         <div class="question" id="question"></div>
         <div class="options" id="options"></div>
+        
         <button id="next-btn">Next</button>
       </div>
     </div>
+    <!--Quiz Results-->
+    
 
-    <script>
-      (function () {
-        let count = 1;
-        let quizData = [];
-        let currentQuestionIndex = 0;
-        let correctAnswers = 0;
-        let selectedAnswer = "";
-        let timeLeft = 100;
-        let timer;
+    <div id="result">
+      <h2>Quiz Results</h2>
+      <p id="score"></p>
+      
+    </div>
+    <button id="go-home-btn" style="display:none;">Go Home</button>
+  </main>
 
-        const form = document.getElementById("quiz-form");
-        const addBtn = document.getElementById("add-question");
-        const quizContainer = document.getElementById("quiz-container");
-        const questionEl = document.getElementById("question");
-        const optionsEl = document.getElementById("options");
-        const nextBtn = document.getElementById("next-btn");
-        const timerEl = document.getElementById("timer");
+    <!--Footer -->
+    <footer id="foot">
+      <div id="foot_div">
+        <div>Shahd Mahmoud</div>
+        <div>Omar Sameh</div>
+        <div>Habiba Mohamed</div>
+        <div>Mohamed Mostafa</div>
+      </div>
+      <p style="margin-top: 20px;">&copy; 2025 Quiz App Team</p>
+    </footer>
 
-        addBtn.addEventListener("click", function () {
-          count++;
-          const template = document.querySelector(".question-block");
-          const clone = template.cloneNode(true);
-          clone.setAttribute("data-index", count);
-
-          clone.querySelector(
-            "label"
-          ).firstChild.textContent = `Question ${count}:`;
-          clone
-            .querySelector('input[name^="question-"]')
-            .setAttribute("name", `question-${count}`);
-
-          const radios = clone.querySelectorAll('input[type="radio"]');
-          const texts = clone.querySelectorAll('input[type="text"]');
-          radios.forEach((r, i) => {
-            r.setAttribute("name", `correct-${count}`);
-            r.setAttribute("value", i + 1);
-            r.checked = false;
-          });
-          texts.forEach((t, i) => {
-            if (i === 0) {
-              t.setAttribute("name", `question-${count}`);
-            } else {
-              t.setAttribute("name", `q${count}-option-${i}`);
-            }
-            t.value = "";
-          });
-          form.insertBefore(clone, addBtn);
-        });
-
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          setup.style.display = "none";
-          /////////////////////////////// quiz data
-          //gather qu
-          quizData = [];
-          for (let i = 1; i <= count; i++) {
-            const questionText = form.querySelector(
-              `[name="question-${i}"]`
-            ).value;
-
-            // gather options
-            const options = [
-              form.querySelector(`[name="q${i}-option-1"]`).value,
-              form.querySelector(`[name="q${i}-option-2"]`).value,
-              form.querySelector(`[name="q${i}-option-3"]`).value,
-              form.querySelector(`[name="q${i}-option-4"]`).value,
-            ];
-
-            // gather corect ans
-            const correctOption = form.querySelector(
-              `[name="correct-${i}"]:checked`
-            ).value;
-
-            quizData.push({
-              question: questionText,
-              options: options,
-              correctAnswer: options[correctOption - 1],
-            });
-          }
-
-          startQuiz();
-        });
-        /////////////// fun2start
-        function startQuiz() {
-          form.style.display = "none";
-          quizContainer.style.display = "block";
-          showQuestion();
-          startTimer();
-        }
-        ///////////////timer
-        function startTimer() {
-          timer = setInterval(() => {
-            timeLeft--;
-            timerEl.textContent = `Time Left: ${timeLeft}s`;
-            if (timeLeft <= 0) {
-              clearInterval(timer);
-              endQuiz();
-            }
-          }, 1000);
-        }
-        /////////////////SHOW
-        function showQuestion() {
-          const currentQuestion = quizData[currentQuestionIndex];
-          questionEl.textContent = currentQuestion.question;
-          optionsEl.innerHTML = "";
-
-          currentQuestion.options.forEach((option) => {
-            const button = document.createElement("button");
-            button.textContent = option;
-            button.onclick = () => {
-              selectedAnswer = option;
-              Array.from(optionsEl.children).forEach(
-                (btn) => (btn.style.backgroundColor = "")
-              );
-              button.style.backgroundColor = "#a8dadc";
-            };
-            optionsEl.appendChild(button);
-          });
-        }
-
-        function nextQuestion() {
-          if (selectedAnswer === "") {
-            alert("Please select an answer!");
-            return;
-          }
-
-          if (selectedAnswer === quizData[currentQuestionIndex].correctAnswer) {
-            correctAnswers++;
-          }
-
-          selectedAnswer = "";
-          currentQuestionIndex++;
-
-          if (currentQuestionIndex < quizData.length) {
-            showQuestion();
-          } else {
-            endQuiz();
-          }
-        }
-
-        function endQuiz() {
-          clearInterval(timer);
-          quizContainer.style.display = "none";
-        }
-
-        nextBtn.addEventListener("click", nextQuestion);
-      })();
-    </script>
+    <script src="main.js"></script>
   </body>
 </html>
