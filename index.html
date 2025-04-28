@@ -10,6 +10,7 @@
     <nav>
       <b>Quiz App</b>
     </nav>
+    <main>
     <div class="cont">
       <h1 id="setup">Setup Your Quiz</h1>
 
@@ -69,7 +70,7 @@
           </div>
         </div>
         <div id="button-group">
-        <button type="button" id="add-question">Add Another Question</button>
+        <button type="button" id="add-question">Add Question</button>
         <button type="reset"  id="reset-btn">Reset Quiz</button>
         <button type="submit" id="save-btn" >Save Quiz</button>
       </div>
@@ -79,7 +80,7 @@
     
       <!-- Tp show quiz  -->
       <div id="quiz-container">
-        <h1>Quiz!</h1>
+        <h1>Quiz Started!</h1>
         <div id="timer"></div>
         <div class="question" id="question"></div>
         <div class="options" id="options"></div>
@@ -89,10 +90,11 @@
     <!--Quiz Results-->
     
 
-    <div id="result" style="display:none; text-align:center; margin-top:20px;">
+    <div id="result">
       <h2>Quiz Results</h2>
       <p id="score"></p>
     </div>
+  </main>
 
     <!--Footer -->
     <footer id="foot">

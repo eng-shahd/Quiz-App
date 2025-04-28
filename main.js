@@ -4,7 +4,7 @@
   let currentQuestionIndex = 0;
   let correctAnswers = 0;
   let selectedAnswer = "";
-  let timeLeft = 40;
+  let timeLeft = 500;
   let timer;
 
   const form = document.getElementById("quiz-form");
@@ -66,11 +66,30 @@
           }
         });
       }
+      updateQuestionNumbers();
+      count = document.querySelectorAll(".question-block").length; 
     }
   });
 
+  /////question numbers 
+  function updateQuestionNumbers() {
+    const questionBlocks = document.querySelectorAll(".question-block");
+    questionBlocks.forEach((block, index) => {
+      const label = block.querySelector(".question-header label");
+      if (label) {
+        label.textContent = `Question ${index + 1}:`;
+      }
+      
+      const radios = block.querySelectorAll('input[type="radio"]');
+      radios.forEach(radio => {
+        radio.name = `q${index + 1}`; 
+      });
+    });
+  }
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+    const setup = document.querySelector(".cont"); 
     setup.style.display = "none";
     /////////////////////////////// quiz data
     //gather qu
