@@ -1,0 +1,253 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f7f7f7;
+}
+main {
+  flex: 1;
+}
+nav {
+  background-color: #2c3e50;
+  width: 100%;
+  padding: 15px 0;
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+  position: relative;
+}
+#timer {
+  position: relative;
+  width: fit-content;
+  margin-top: 20px;
+  font-size: 20px;
+  color: #ff5555;
+  font-weight: bold;
+  background: white;
+  padding: 5px 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  display: none; 
+}
+
+.cont {
+  max-width: 900px;
+  margin: 45px auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #34495e;
+}
+.question-block {
+  border: 2px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: #fafafa;
+  position: relative;
+}
+.question-block label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+input[type="text"]:focus {
+  border-color: #3498db;
+  outline: none;
+}
+.options {
+  margin-top: 15px;
+  padding-left: 20px;
+}
+.options label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+.options input[type="radio"] {
+  margin-right: 10px;
+}
+#button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+#add-question, #save-btn, #reset-btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+#add-question, #save-btn {
+  background-color: #27ae60;
+}
+#add-question:hover, #save-btn:hover {
+  background-color: #219150;
+}
+#reset-btn {
+  background-color: #e74c3c;
+}
+#reset-btn:hover {
+  background-color: #c0392b;
+}
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #e74c3c;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: transform 0.2s;
+}
+.delete-btn:hover {
+  transform: scale(1.2);
+}
+footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: auto;
+}
+#foot_div {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  max-width: 400px;
+  margin: auto;
+}
+#quiz-container {
+  display: none;
+  max-width: 900px;
+  width:fit-content
+  margin: 40px auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+#question {
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.options button {
+  display: block;
+  width: 250px;
+  padding: 12px;
+  margin: 10px auto;
+  border-radius: 10px;
+  border: 1px solid #3498db;
+  background-color: #3498db;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+.options button:hover {
+  background-color: #2980b9;
+  transform: scale(1.05);
+}
+#next-btn {
+  display: block;
+  margin: 30px auto 0;
+  padding: 12px 25px;
+  font-size: 18px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+#next-btn:hover {
+  background-color: #2980b9;
+}
+
+
+
+#result {
+  display: none;
+  text-align: center;
+  margin: 40px auto;
+  max-width: 900px;
+  padding: 40px;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  color: white;
+  animation: fadeIn 1s ease-in-out;
+}
+#result h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+#result p {
+  font-size: 22px;
+  margin: 10px 0;
+}
+#go-home-btn {
+  display: none;
+  position: fixed;
+  bottom: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000; 
+}
+
+#go-home-btn:hover {
+  background-color: #45a049;
+}
+
+
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
