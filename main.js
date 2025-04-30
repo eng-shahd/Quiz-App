@@ -238,6 +238,13 @@
 
     scoreEl.innerHTML = `You answered ${correctAnswers} out of ${totalQuestions} questions correctly. <br> Your score: ${percentage}%`;
     resultContainer.style.display = "block";
+
+    
+    const goHomeBtn = document.getElementById("go-home-btn");
+    goHomeBtn.style.display = "block";
+    goHomeBtn.addEventListener("click", function() {
+    window.location.href = "index.html"; 
+    });
   }
 
   prevBtn.addEventListener("click", prevQuestion);

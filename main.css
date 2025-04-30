@@ -277,6 +277,26 @@ footer {
   }
 }
 
+#go-home-btn {
+  display: none;
+  position: fixed;
+  bottom: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000; 
+}
+
+#go-home-btn:hover {
+  background-color: #45a049;
+}
+
 @media (max-width: 600px) {
   .cont, #quiz-container {
     max-width: 90%;
