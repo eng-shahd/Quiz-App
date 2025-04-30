@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <nav>
+      <b>Quiz App</b>
+    </nav>
+    <main>
+      <div class="cont">
+        <h1 id="setup">Setup Your Quiz</h1>
+
+        <form id="quiz-form">
+          <div class="question-block" data-index="1">
+            <div class="question-header">
+              <label>
+                Question 1:
+                <input
+                  type="text"
+                  name="question-1"
+                  placeholder="Enter your question here"
+                  required
+                />
+              </label>
+              <button class="delete-btn" type="button">🗑️</button>
+            </div>
+            <div class="options">
+              <label>
+                <input type="radio" name="correct-1" value="1" required />
+                Option 1
+              </label>
+              <input
+                type="text"
+                name="q1-option-1"
+                placeholder="Option 1 text"
+                required
+              />
+              <label>
+                <input type="radio" name="correct-1" value="2" /> Option 2
+              </label>
+              <input
+                type="text"
+                name="q1-option-2"
+                placeholder="Option 2 text"
+                required
+              />
+              <label>
+                <input type="radio" name="correct-1" value="3" /> Option 3
+              </label>
+              <input
+                type="text"
+                name="q1-option-3"
+                placeholder="Option 3 text"
+                required
+              />
+              <label>
+                <input type="radio" name="correct-1" value="4" /> Option 4
+              </label>
+              <input
+                type="text"
+                name="q1-option-4"
+                placeholder="Option 4 text"
+                required
+              />
+            </div>
+          </div>
+          <div id="button-group">
+            <button type="button" id="add-question">Add Question</button>
+            <button type="reset" id="reset-btn">Reset Quiz</button>
+            <button type="submit" id="save-btn">Save Quiz</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- To show quiz -->
+      <div id="quiz-container">
+        <h1>Quiz Started!</h1>
+        <div id="timer"></div>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="nav-buttons">
+          <button id="prev-btn">Previous</button>
+          <button id="next-btn">Next</button>
+        </div>
+        <button id="submit-btn">Submit Quiz</button>
+      </div>
+
+      <!-- Quiz Results -->
+      <div id="result">
+        <h2>Quiz Results</h2>
+        <p id="score"></p>
+      </div>
+      <button id="go-home-btn" style="display: none">Go Home</button>
+    </main>
+
+    <!-- Footer -->
+    <footer id="foot">
+      <div id="foot_div">
+        <div>Shahd Mahmoud</div>
+        <div>Omar Sameh</div>
+        <div>Habiba Mohamed</div>
+        <div>Mohamed Mostafa</div>
+      </div>
+      <p style="margin-top: 20px">© 2025 Quiz App Team</p>
+    </footer>
+
+    <script src="main.js"></script>
+  </body>
+</html>
